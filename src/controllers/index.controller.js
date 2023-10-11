@@ -1,5 +1,6 @@
 const controller = {};
 const mongoose = require('mongoose');
+const Model =require ('../models/users.model')
 const { url } = require('../dbConection/connection');
 
 mongoose.connect(url, {
@@ -20,7 +21,8 @@ db.once('open', () => {
 controller.index = async (req, res) => { // Agrega 'async' aquí
   try {
     const title = 'index desde el servidor con una variable';
-    console.log('CONNECTION OK'); // No necesitas una nueva conexión aquí
+    const allUser = await Model.find()
+    console.log(allUser)
     res.render('index', { title });
   } catch (err) {
     console.error(err);
